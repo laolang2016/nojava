@@ -11,13 +11,13 @@
             "hidden": true,
             "generator": "Ninja",
             "cacheVariables": {
-                "CMAKE_CXX_COMPILER": "cl.exe",
-                "CMAKE_MAKE_PROGRAM": "ninja.exe",
-                "CMAKE_CXX_FLAGS": "/utf-8 -D_UNICODE -DUNICODE"
+                "CMAKE_CXX_COMPILER": "D:/program/qt/Tools/mingw1120_64/bin/g++.exe",
+                "CMAKE_MAKE_PROGRAM": "D:/program/MICROSOFT/vs2022/COMMUNTITY/Common7/IDE/COMMONEXTENSIONS/MICROSOFT/CMake/Ninja/ninja.exe",
+                "CMAKE_CXX_FLAGS": "-Wall -Wextra"
             }
         },
         {
-            "name": "win64-release",
+            "name": "windows-release",
             "displayName": "win 64 release",
             "inherits": "windows-base",
             "binaryDir": "${sourceDir}/build/ninja-release",
@@ -26,7 +26,7 @@
             }
         },
         {
-            "name": "win64-debug",
+            "name": "windows-debug",
             "displayName": "win 64 debug",
             "inherits": "windows-base",
             "binaryDir": "${sourceDir}/build/ninja-debug",
@@ -67,12 +67,12 @@
     ],
     "buildPresets": [
         {
-            "name": "win64-release",
-            "configurePreset": "win64-release"
+            "name": "windows-release",
+            "configurePreset": "windows-release"
         },
         {
-            "name": "win64-debug",
-            "configurePreset": "win64-debug"
+            "name": "windows-debug",
+            "configurePreset": "windows-debug"
         },
         {
             "name": "linux-release",
