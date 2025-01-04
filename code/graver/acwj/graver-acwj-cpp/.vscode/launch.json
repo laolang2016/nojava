@@ -1,0 +1,28 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "app",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceRoot}/build/ninja-debug/dist/bin/graver",
+            "args": [],
+            "cwd": "${workspaceFolder}/build/ninja-debug/dist/bin",
+            "preLaunchTask": "build-debug"
+        },
+        {
+            "name": "test common",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceRoot}/build/ninja-debug/dist/test/graver_test",
+            "args": [
+                "-tc=test_common_one"
+            ],
+            "cwd": "${workspaceFolder}/build/ninja-debug/dist/test",
+            "preLaunchTask": "build-debug"
+        }
+    ]
+}
