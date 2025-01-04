@@ -1,25 +1,27 @@
 #include <spdlog/fmt/fmt.h>
 #include <spdlog/spdlog.h>
 
+#include <iostream>
 #include <memory>
 
-#include "graver/app/vector.h"
 #include "graver/util/log_util.h"
 
 int main() {
-    LogUtil::init(spdlog::level::info, "../logs/app.log");
-    std::shared_ptr<spdlog::logger> log = LogUtil::getLogger("app");
+    try {
+        // 初始化日志系统
+        LogUtil::init(spdlog::level::info, "../logs/app.log");
 
-    Vector2 v1(1, 2);
-    Vector2 v2(v1);
+        // 获取日志记录器
+        std::shared_ptr<spdlog::logger> log = LogUtil::getLogger("app");
 
-    v1.print();
-    v2.print();
+        // 记录日志消息
+        SPDLOG_LOGGER_INFO(log, "Hello Graver");
 
-    v1.add(v2);
-
-    v1.print();
-
-    spdlog::shutdown();
+        // 关闭日志系统
+        spdlog::shutdown();
+    } catch (const std::exception& e) {
+        std::cerr << "Exception caught: " << e.what() << std::endl;
+        return 1;
+    }
     return 0;
 }

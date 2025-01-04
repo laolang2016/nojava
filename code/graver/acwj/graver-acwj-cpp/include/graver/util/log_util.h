@@ -10,9 +10,7 @@
 #include <string>
 #include <vector>
 
-#include "graver/util/pch.h"
-
-class JANNA_LIB_UTIL LogUtil {
+class LogUtil {
 public:
     static void                          init(spdlog::level::level_enum level = spdlog::level::debug, std::string log_file = "app.log");
     static spdlog::level::level_enum     getGlobalLevel();
