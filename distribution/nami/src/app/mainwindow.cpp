@@ -8,9 +8,11 @@
 
 namespace nami {
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
-    this->log = LogUtil::getLogger("app");
+    this->log = LogUtil::getLogger("mainwindow");
 
     init();
+
+    connect(Pubsub::getInstance(), &Pubsub::signalPublish, this, &MainWindow::subscribe);
 }
 
 void MainWindow::closeEvent(QCloseEvent *event) {
@@ -35,6 +37,10 @@ void MainWindow::init() {
     m_act_todo = new QAction("帮助");
     m_act_todo->setIcon(QPixmap(":icon/todo_16"));
     m_toolbar->addAction(m_act_todo);
+}
+
+void MainWindow::subscribe(const NamiTopic &topic, [[maybe_unused]] const QMap<QString, QVariant> &param) {
+    SPDLOG_LOGGER_DEBUG(log, fmt::format("topic:{}", topic.topic.toStdString()));
 }
 
 }  // namespace nami

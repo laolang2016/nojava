@@ -1,8 +1,12 @@
 aux_source_directory(. nami_LIB_UTIL_SOURCES)
 list(APPEND nami_LIB_UTIL_SOURCES
     ${CMAKE_SOURCE_DIR}/include/nami/util/app_config.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/app_config.cpp
     ${CMAKE_SOURCE_DIR}/include/nami/util/configuration.h
     ${CMAKE_SOURCE_DIR}/include/nami/util/log_util.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/log_util.cpp
+    ${CMAKE_SOURCE_DIR}/include/nami/util/pubsub.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/pubsub.cpp
 )
 qt_add_library(${nami_lib_util_lib_name} SHARED ${nami_LIB_UTIL_SOURCES})
 
