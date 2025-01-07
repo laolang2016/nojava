@@ -9,8 +9,8 @@ else
 	PRESET_RELEASE = windows-release
 endif
 
-BUILD_DIR_DEBUG = build/$(PRESET_DEBUG)
-BUILD_DIR_RELEASE = build/$(PRESET_RELEASE)
+BUILD_DIR_DEBUG = build/ninja-debug
+BUILD_DIR_RELEASE = build/ninja-release
 
 
 ALL: app

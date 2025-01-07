@@ -7,6 +7,7 @@ set(APP_SOURCES
 qt_add_executable(nami
     MANUAL_FINALIZATION
     ${APP_SOURCES}
+    ${PROJECT_SOURCE_DIR}/icon.rc
 )
 
 target_link_libraries(nami PRIVATE
@@ -28,9 +29,8 @@ if(WIN32)
     add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
 
         # 复制 qt 资源文件
-        COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/resources_build/win32/qt/Qt6Core.dll $<TARGET_FILE_DIR:${PROJECT_NAME}>/
-        COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/resources_build/win32/qt/Qt6Gui.dll $<TARGET_FILE_DIR:${PROJECT_NAME}>/
-        COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/resources_build/win32/qt/Qt6Widgets.dll $<TARGET_FILE_DIR:${PROJECT_NAME}>/
-        COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/resources_build/win32/qt/plugins $<TARGET_FILE_DIR:${PROJECT_NAME}>/plugins
+        # COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/resources_build/win32/qt/Qt6Core.dll $<TARGET_FILE_DIR:${PROJECT_NAME}>/
+        COMMAND ${CMAKE_COMMAND} -E echo "$<TARGET_FILE:${PROJECT_NAME}>"
+        COMMAND ${WINDEPLOYQT6_EXEC_PATH} "$<TARGET_FILE:${PROJECT_NAME}>"
     )
 endif()

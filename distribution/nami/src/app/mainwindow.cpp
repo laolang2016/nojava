@@ -5,6 +5,7 @@
 namespace nami {
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     this->log = LogUtil::getLogger("app");
+    resize(800, 600);
 }
 
 void MainWindow::closeEvent(QCloseEvent *event) {

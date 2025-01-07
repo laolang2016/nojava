@@ -10,11 +10,13 @@
             "name": "windows-base",
             "displayName": "windows base",
             "description": "windows 通用设置",
-            "generator": "MinGW Makefiles",
+            "generator": "Ninja",
             "cacheVariables": {
                 "CMAKE_PREFIX_PATH": "D:/program/qt/6.5.3/mingw_64",
                 "CMAKE_CXX_COMPILER": "D:/program/qt/Tools/mingw1120_64/bin/g++.exe",
-                "CMAKE_CXX_FLAGS": "-Wall -Wextra"
+                "CMAKE_MAKE_PROGRAM": "D:/program/MICROSOFT/vs2022/COMMUNTITY/Common7/IDE/COMMONEXTENSIONS/MICROSOFT/CMake/Ninja/ninja.exe",
+                "CMAKE_CXX_FLAGS": "-Wall -Wextra",
+                "WINDEPLOYQT6_EXEC_PATH": "D:/program/qt/6.5.3/mingw_64/bin/windeployqt6.exe"
             }
         },
         {

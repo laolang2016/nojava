@@ -37,6 +37,7 @@ add_compile_options(-Dnami_LOG_LEVEL=1)
 
 # 项目配置文件
 configure_file(nami_configuration.h.in ${PROJECT_SOURCE_DIR}/include/nami/util/configuration.h)
+set(ICON_FILES ${PROJECT_SOURCE_DIR}/icon.rc)
 
 # 生成 compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
