@@ -1,0 +1,5 @@
+build/
+
+resources_build/
+
+include/nami/util/configuration.h

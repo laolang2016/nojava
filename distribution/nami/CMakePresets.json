@@ -1,0 +1,92 @@
+{
+    "version": 6,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 26,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "windows-base",
+            "displayName": "windows base",
+            "description": "windows 通用设置",
+            "generator": "MinGW Makefiles",
+            "cacheVariables": {
+                "CMAKE_PREFIX_PATH": "D:/program/qt/6.5.3/mingw_64",
+                "CMAKE_CXX_COMPILER": "D:/program/qt/Tools/mingw1120_64/bin/g++.exe",
+                "CMAKE_CXX_FLAGS": "-Wall -Wextra"
+            }
+        },
+        {
+            "name": "windows-release",
+            "displayName": "windows release",
+            "description": "windows 平台下使用 mingw 构建 release 版本",
+            "inherits": "windows-base",
+            "binaryDir": "${sourceDir}/build/ninja-release",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "windows-debug",
+            "displayName": "windows debug",
+            "description": "windows 平台下使用 mingw 构建 debug 版本",
+            "inherits": "windows-base",
+            "binaryDir": "${sourceDir}/build/ninja-debug",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_DEBUG_POSTFIX": "d"
+            }
+        },
+        {
+            "name": "linux-base",
+            "displayName": "linux base",
+            "description": "linux 通用设置",
+            "generator": "Ninja",
+            "cacheVariables": {
+                "CMAKE_PREFIX_PATH": "/home/laolang/Qt/6.7.2/gcc_64",
+                "CMAKE_MAKE_PROGRAM": "/home/laolang/program/ninja/bin/ninja",
+                "CMAKE_CXX_COMPILER": "/usr/bin/g++",
+                "CMAKE_CXX_FLAGS": "-Wall -Wextra"
+            }
+        },
+        {
+            "name": "linux-release",
+            "displayName": "linux release",
+            "description": "linux 平台下使用 gcc 构建 release 版本",
+            "inherits": "linux-base",
+            "binaryDir": "${sourceDir}/build/ninja-release",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "linux-debug",
+            "displayName": "linux debug",
+            "description": "linux 平台下使用 gcc 构建 debug 版本",
+            "inherits": "linux-base",
+            "binaryDir": "${sourceDir}/build/ninja-debug",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "windows-release",
+            "configurePreset": "windows-release"
+        },
+        {
+            "name": "windows-debug",
+            "configurePreset": "windows-debug"
+        },
+        {
+            "name": "linux-release",
+            "configurePreset": "linux-release"
+        },
+        {
+            "name": "linux-debug",
+            "configurePreset": "linux-debug"
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+#pragma once
+namespace nami {
+// clang-format off
+#define nami_VERSION_MAJOR @nami_VERSION_MAJOR@
+#define nami_VERSION_MINOR @nami_VERSION_MINOR@
+#define nami_VERSION_PATCH @nami_VERSION_PATCH@
+// clang-format on
+};  // namespace nami
