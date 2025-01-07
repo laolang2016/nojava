@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/logo">
+        <file alias="logo_16">res/logo/logo_16x16.png</file>
+        <file alias="logo_32">res/logo/logo_32x32.png</file>
+        <file alias="logo_128">res/logo/logo_128x128.png</file>
+    </qresource>
+    <qresource prefix="/icon">
+        <file alias="user_default_16">res/icon/user_default_16x16.png</file>
+        <file alias="setting_16">res/icon/setting_16x16.png</file>
+        <file alias="statistics_16">res/icon/statistics_16x16.png</file>
+        <file alias="exit_16">res/icon/exit_16x16.png</file>
+        <file alias="todo_16">res/icon/todo_16x16.png</file>
+        <file alias="todo_active_16">res/icon/todo_active_16x16.png</file>
+    </qresource>
+</RCC>

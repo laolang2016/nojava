@@ -2,11 +2,14 @@ set(APP_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/mainwindow.cpp
     ${PROJECT_SOURCE_DIR}/include/nami/app/mainwindow.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/usertoolbutton.cpp
+    ${PROJECT_SOURCE_DIR}/include/nami/app/usertoolbutton.h
 )
 
 qt_add_executable(nami
     MANUAL_FINALIZATION
     ${APP_SOURCES}
+    ${QRC_FILES}
     ${PROJECT_SOURCE_DIR}/icon.rc
 )
 
