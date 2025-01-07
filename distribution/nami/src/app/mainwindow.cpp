@@ -2,6 +2,7 @@
 
 #include <qnamespace.h>
 
+#include <QMessageBox>
 #include <QPixmap>
 
 #include "nami/util/log_util.h"
@@ -40,6 +41,7 @@ void MainWindow::init() {
 }
 
 void MainWindow::subscribe(const NamiTopic &topic, [[maybe_unused]] const QMap<QString, QVariant> &param) {
+    QMessageBox::aboutQt(nullptr);
     SPDLOG_LOGGER_DEBUG(log, fmt::format("topic:{}", topic.topic.toStdString()));
 }
 

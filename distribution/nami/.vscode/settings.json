@@ -8,12 +8,6 @@
         "**/.DS_Store": true,
         "**/Thumbs.db": true,
         // "**/build": true,
-        "**/Testing": true,
-        "**/build-nami*": true,
-        "**/CMakeLists.txt.user*": true,
-        "**/vcpkg": true,
-        "**/vcpkg_installed": true,
-        "**/.venv": true
     },
     // 保存时自动格式化
     "editor.formatOnSave": true,

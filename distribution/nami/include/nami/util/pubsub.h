@@ -7,6 +7,8 @@
 #include <QString>
 #include <QVariant>
 
+#include "nami/util/pch.h"
+
 namespace nami {
 /**
  * @brief 消息主题
@@ -26,7 +28,7 @@ typedef struct {
     QString publish;
 } NamiTopic;
 
-class Pubsub : public QObject {
+class NAMI_LIB_UTIL Pubsub : public QObject {
     Q_OBJECT
 
 public:

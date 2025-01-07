@@ -1,6 +1,7 @@
 #include "test_common.h"
 
 #include <QtTest>
+#include <string>
 
 #include "nami/util/log_util.h"
 
@@ -12,6 +13,8 @@ TestCommon::TestCommon() {
 
 bool TestCommon::testCommonOne() {
     SPDLOG_LOGGER_DEBUG(this->log, fmt::format("test_common one start"));
+    std::string hello = "hello";
+    SPDLOG_LOGGER_DEBUG(this->log, fmt::format("hello {}", hello));
     SPDLOG_LOGGER_DEBUG(this->log, fmt::format("test_common one end"));
     return true;
 }

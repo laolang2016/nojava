@@ -8,6 +8,11 @@ list(APPEND nami_LIB_UTIL_SOURCES
     ${CMAKE_SOURCE_DIR}/include/nami/util/pubsub.h
     ${CMAKE_CURRENT_SOURCE_DIR}/pubsub.cpp
 )
+
+if(WIN32)
+    add_compile_options(-DNAMI_UTIL_LIBRARY_EXPORT)
+endif()
+
 qt_add_library(${nami_lib_util_lib_name} SHARED ${nami_LIB_UTIL_SOURCES})
 
 target_link_libraries(${nami_lib_util_lib_name} PUBLIC

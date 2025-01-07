@@ -5,7 +5,23 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "app",
+            "name": "app-windows",
+            "type": "by-gdb",
+            "request": "launch",
+            "program": "${workspaceRoot}/build/ninja-debug/dist/bin/nami",
+            "cwd": "${workspaceFolder}/build/ninja-debug/dist/bin",
+            "preLaunchTask": "build-debug"
+        },
+        {
+            "name": "test_common-windows",
+            "type": "by-gdb",
+            "request": "launch",
+            "program": "${workspaceRoot}/build/ninja-debug/dist/test/nami_test",
+            "cwd": "${workspaceFolder}/build/ninja-debug/dist/bin",
+            "preLaunchTask": "build-debug"
+        },
+        {
+            "name": "app-linux",
             "type": "lldb",
             "request": "launch",
             "program": "${workspaceRoot}/build/ninja-debug/dist/bin/nami",
@@ -14,7 +30,7 @@
             "preLaunchTask": "build-debug"
         },
         {
-            "name": "test_common",
+            "name": "test_common-linux",
             "type": "lldb",
             "request": "launch",
             "program": "${workspaceRoot}/build/ninja-debug/dist/test/nami_test",

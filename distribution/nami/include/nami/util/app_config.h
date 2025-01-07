@@ -8,6 +8,7 @@
 #include <QString>
 
 #include "nami/util/configuration.h"
+#include "nami/util/pch.h"
 
 namespace nami {
 #define nami_VERSION_MAJOR_COPY (nami_VERSION_MAJOR)
@@ -17,7 +18,7 @@ namespace nami {
 #define nami_VERSION_STR(R) #R
 #define nami_VERSION_STR2(R) nami_VERSION_STR(R)
 
-class AppConfig : public QObject {
+class NAMI_LIB_UTIL AppConfig : public QObject {
     Q_OBJECT
 
 public:

@@ -11,8 +11,9 @@
 #include <vector>
 
 #include "nami/util/app_config.h"
+#include "nami/util/pch.h"
 namespace nami {
-class LogUtil {
+class NAMI_LIB_UTIL LogUtil {
 public:
     static void init(spdlog::level::level_enum level = AppConfig::getInstance()->logLevel(), std::string log_file = "app.log");
     static spdlog::level::level_enum     getGlobalLevel();

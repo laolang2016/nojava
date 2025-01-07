@@ -14,7 +14,7 @@ UserToolButton::UserToolButton(QWidget *parent) : QToolButton(parent) {
     this->log = LogUtil::getLogger("usertoolbutton");
 
     m_menu = new QMenu(this);
-    m_menu->setObjectName("menu");
+    // m_menu->setObjectName("menu");
 
     m_act_setting = m_menu->addAction("设置");
     m_act_setting->setObjectName("act_setting");
