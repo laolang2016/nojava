@@ -7,31 +7,41 @@
         {
             "label": "build-debug",
             "type": "shell",
-            "command": "make config_debug && make build_debug"
+            "windows": {
+                "command": "cmake -S . -B build/gnu-debug -DCMAKE_BUILD_TYPE=Debug -DCMAKE_PREFIX_PATH=\"D:/program/qt/6.5.3/mingw_64\" -G \"MinGW Makefiles\" && cmake --build build/gnu-debug"
+            },
+            "linux": {
+                "command": ""
+            }
         },
         // release 构建
         {
             "label": "build-release",
             "type": "shell",
-            "command": "make config_release && make build_release"
+            "windows": {
+                "command": "cmake -S . -B build/gnu-release -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=\"D:/program/qt/6.5.3/mingw_64\" -G \"MinGW Makefiles\" && cmake --build build/gnu-release"
+            },
+            "linux": {
+                "command": ""
+            }
         },
         // 清理 debug
         {
             "label": "clean-debug",
             "type": "shell",
-            "command": "make clean_debug"
+            "command": "rm -rf build/gnu-debug"
         },
         // 清理 release
         {
             "label": "clean-release",
             "type": "shell",
-            "command": "make clean_release"
+            "command": "rm -rf build/gnu-release"
         },
         // 清理 所有
         {
             "label": "clean-all",
             "type": "shell",
-            "command": "make clean_all"
+            "command": "rm -rf build"
         },
         // 重新 debug 构建
         {
@@ -65,10 +75,10 @@
             "label": "run-release",
             "type": "shell",
             "windows": {
-                "command": "cd build/ninja-release/dist/bin && ./nami",
+                "command": "cd build/gnu-release/dist/bin && ./nami",
             },
             "linux": {
-                "command": "cd build/ninja-release/dist/bin && ./nami",
+                "command": "cd build/gnu-release/dist/bin && ./nami",
             },
             "dependsOn": [
                 "build-release"
@@ -78,10 +88,10 @@
             "label": "run-test-common",
             "type": "shell",
             "windows": {
-                "command": "cd build/ninja-release/dist/test && ./nami_test testCommon",
+                "command": "cd build/gnu-release/dist/test && ./nami_test testCommon",
             },
             "linux": {
-                "command": "cd build/ninja-release/dist/test && ./nami_test testCommon",
+                "command": "cd build/gnu-release/dist/test && ./nami_test testCommon",
             },
             "dependsOn": [
                 "build-release"

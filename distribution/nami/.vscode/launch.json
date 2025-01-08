@@ -8,36 +8,36 @@
             "name": "app-windows",
             "type": "by-gdb",
             "request": "launch",
-            "program": "${workspaceRoot}/build/ninja-debug/dist/bin/nami",
-            "cwd": "${workspaceFolder}/build/ninja-debug/dist/bin",
+            "program": "${workspaceRoot}/build/gnu-debug/dist/bin/nami",
+            "cwd": "${workspaceFolder}/build/gnu-debug/dist/bin",
             "preLaunchTask": "build-debug"
         },
         {
             "name": "test_common-windows",
             "type": "by-gdb",
             "request": "launch",
-            "program": "${workspaceRoot}/build/ninja-debug/dist/test/nami_test",
-            "cwd": "${workspaceFolder}/build/ninja-debug/dist/bin",
+            "program": "${workspaceRoot}/build/gnu-debug/dist/test/nami_test",
+            "cwd": "${workspaceFolder}/build/gnu-debug/dist/bin",
             "preLaunchTask": "build-debug"
         },
         {
             "name": "app-linux",
             "type": "lldb",
             "request": "launch",
-            "program": "${workspaceRoot}/build/ninja-debug/dist/bin/nami",
+            "program": "${workspaceRoot}/build/gnu-debug/dist/bin/nami",
             "args": [],
-            "cwd": "${workspaceFolder}/build/ninja-debug/dist/bin",
+            "cwd": "${workspaceFolder}/build/gnu-debug/dist/bin",
             "preLaunchTask": "build-debug"
         },
         {
             "name": "test_common-linux",
             "type": "lldb",
             "request": "launch",
-            "program": "${workspaceRoot}/build/ninja-debug/dist/test/nami_test",
+            "program": "${workspaceRoot}/build/gnu-debug/dist/test/nami_test",
             "args": [
                 "testCommon"
             ],
-            "cwd": "${workspaceFolder}/build/ninja-debug/dist/bin",
+            "cwd": "${workspaceFolder}/build/gnu-debug/dist/bin",
             "preLaunchTask": "build-debug"
         }
     ]

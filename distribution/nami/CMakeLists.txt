@@ -1,5 +1,12 @@
 cmake_minimum_required(VERSION 3.16)
 
+if(WIN32)
+    set(CMAKE_CXX_COMPILER "D:/program/qt/Tools/mingw1120_64/bin/g++.exe")
+    set(WINDEPLOYQT6_EXEC_PATH "D:/program/qt/6.5.3/mingw_64/bin/windeployqt6.exe")
+elseif(UNIX)
+    set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
+endif()
+
 # 语言环境配置 ###########################################################################################################
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
