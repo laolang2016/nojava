@@ -37,7 +37,7 @@
     // 关闭形参显示
     "editor.inlayHints.enabled": "off",
     // clang tidy 配置
-    "clang-tidy.buildPath": "build/ninja-release",
+    "clang-tidy.buildPath": "build/gnu-release",
     "clang-tidy.checks": [
         // //custom checks
         // "performance-*",
@@ -214,7 +214,7 @@
         //后台分析并保存索引文件
         "--background-index",
         //compile_commands.json目录位置
-        "--compile-commands-dir=build/ninja-release",
+        "--compile-commands-dir=build/gnu-release",
         //同时开启的任务数
         "-j=12",
         // "--folding-ranges",

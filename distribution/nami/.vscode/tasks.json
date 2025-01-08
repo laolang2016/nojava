@@ -11,7 +11,7 @@
                 "command": "cmake -S . -B build/gnu-debug -DCMAKE_BUILD_TYPE=Debug -DCMAKE_PREFIX_PATH=\"D:/program/qt/6.5.3/mingw_64\" -G \"MinGW Makefiles\" && cmake --build build/gnu-debug"
             },
             "linux": {
-                "command": ""
+                "command": "cmake -S . -B build/gnu-debug -DCMAKE_BUILD_TYPE=Debug -DCMAKE_PREFIX_PATH=\"/home/laolang/Qt/6.7.2/gcc_64\" -G \"Unix Makefiles\" && cmake --build build/gnu-debug"
             }
         },
         // release 构建
@@ -22,7 +22,7 @@
                 "command": "cmake -S . -B build/gnu-release -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=\"D:/program/qt/6.5.3/mingw_64\" -G \"MinGW Makefiles\" && cmake --build build/gnu-release"
             },
             "linux": {
-                "command": ""
+                "command": "cmake -S . -B build/gnu-release -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=\"/home/laolang/Qt/6.7.2/gcc_64\" -G \"Unix Makefiles\" && cmake --build build/gnu-release"
             }
         },
         // 清理 debug
