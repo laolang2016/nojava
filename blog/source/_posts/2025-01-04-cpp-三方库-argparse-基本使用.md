@@ -642,63 +642,61 @@ foo@bar:/home/dev/$ ./main --verbose 4
 The square of 4 is 16
 ```
 
-# Printing Help
+# 打印帮助
 
 `std::cout << program` prints a help message, including the program usage and information about the arguments registered with the `ArgumentParser`. For the previous example, here's the default help message:
 
-```
-foo@bar:/home/dev/$ ./main --help
-Usage: main [-h] [--verbose] square
+可以直接使用 `std::cout << program` 打印帮助信息, 此信息包含了基本的说明与参数的帮助. 也可以使用 `program.help().str()` 获取帮助信息字符串.
 
-Positional arguments:
-  square       	display the square of a given number
+`ArgumentParser::add_description` 会在所有参数信息前打印
+`ArgumentParser::add_epilog` 会在最后打印
 
-Optional arguments:
-  -h, --help   	shows help message and exits
-  -v, --version	prints version information and exits
-  --verbose
-```
+## 代码
 
-You may also get the help message in string via `program.help().str()`.
-
-## Adding a description and an epilog to help
-
-`ArgumentParser::add_description` will add text before the detailed argument
-information. `ArgumentParser::add_epilog` will add text after all other help output.
-
-```cpp
+```c++
 #include <argparse/argparse.hpp>
 
-int main(int argc, char *argv[]) {
-  argparse::ArgumentParser program("main");
-  program.add_argument("thing").help("Thing to use.").metavar("THING");
-  program.add_argument("--member").help("The alias for the member to pass to.").metavar("ALIAS");
-  program.add_argument("--verbose").default_value(false).implicit_value(true);
+int main(int argc, char* argv[]) {
+    argparse::ArgumentParser program("graver");
 
-  program.add_description("Forward a thing to the next member.");
-  program.add_epilog("Possible things include betingalw, chiz, and res.");
+    program.add_argument("square").help("输出数字的平方").scan<'i', int>();
 
-  program.parse_args(argc, argv);
+    program.add_description("在所有参数说明之前");
+    program.add_epilog("在所有参数说明之后");
 
-  std::cout << program << std::endl;
+    try {
+        program.parse_args(argc, argv);
+    } catch (const std::exception& err) {
+        std::cerr << err.what() << std::endl;
+        std::cerr << program;
+        return 1;
+    }
+
+    auto input = program.get<int>("square");
+    std::cout << (input * input) << std::endl;
+
+    return 0;
 }
 ```
 
-```console
-Usage: main [-h] [--member ALIAS] [--verbose] THING
+## 运行效果
 
-Forward a thing to the next member.
+```console
+laolang@laolang-mint:bin$ ./graver -h
+Usage: graver [--help] [--version] square
+
+在所有参数说明之前
 
 Positional arguments:
-  THING         	Thing to use.
+  square         输出数字的平方 
 
 Optional arguments:
-  -h, --help    	shows help message and exits
-  -v, --version 	prints version information and exits
-  --member ALIAS	The alias for the member to pass to.
-  --verbose
+  -h, --help     shows help message and exits 
+  -v, --version  prints version information and exits 
 
-Possible things include betingalw, chiz, and res.
+在所有参数说明之后
+
+laolang@laolang-mint:bin$ 
 ```
 
 
