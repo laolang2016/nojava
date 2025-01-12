@@ -1,11 +1,18 @@
 package com.laolang.zuke.framework.web.config;
 
+import com.laolang.zuke.framework.web.interceptor.ControllerLogInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class ZukeWebConfig implements WebMvcConfigurer {
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new ControllerLogInterceptor()).addPathPatterns("/**");
+    }
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {

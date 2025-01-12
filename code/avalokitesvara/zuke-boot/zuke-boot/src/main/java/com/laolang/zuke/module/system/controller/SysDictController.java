@@ -1,6 +1,7 @@
 package com.laolang.zuke.module.system.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.laolang.zuke.framework.web.annotaion.ControllerLog;
 import com.laolang.zuke.module.system.logic.SysDictLogic;
 import com.laolang.zuke.module.system.req.SysDictDataChangeStatusReq;
 import com.laolang.zuke.module.system.req.SysDictDataDeleteReq;
@@ -38,6 +39,7 @@ public class SysDictController {
     /**
      * 字典类型分组信息
      */
+    @ControllerLog
     @PostMapping("type/groupInfo")
     public List<SysDictTypeGroupInfoListRsp> typeGroupInfo() {
         return sysDictLogic.typeGroupInfo();
@@ -46,6 +48,7 @@ public class SysDictController {
     /**
      * 字典类型列表
      */
+    @ControllerLog
     @PostMapping("type/list")
     public PageInfo<SysDictTypeListRsp> typeList(@RequestBody SysDictTypeListReq req) {
         return sysDictLogic.typeList(req);
