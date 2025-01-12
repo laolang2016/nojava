@@ -5,6 +5,7 @@ import com.laolang.zuke.framework.common.exception.BusinessException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -46,6 +47,7 @@ public class RestExceptionHandlerAdvice {
         R<?> r = R.error();
         response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         log.error("服务异常. url:{}", request.getRequestURI());
+        r.setMsg(ExceptionUtils.getMessage(ex));
         return r;
     }
 }

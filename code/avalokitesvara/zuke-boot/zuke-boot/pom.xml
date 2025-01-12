@@ -23,6 +23,12 @@
 
         <tlog.version>1.5.0</tlog.version>
 
+        <!-- db -->
+        <mybatis-plus.version>3.5.1</mybatis-plus.version>
+        <druid.version>1.2.4</druid.version>
+        <pagehelper.version>1.4.1</pagehelper.version>
+        <ojdbc.version>11.2.0.1.0</ojdbc.version>
+
         <!-- tool -->
         <hutool.version>5.8.11</hutool.version>
         <vavr.version>0.10.4</vavr.version>
@@ -67,12 +73,36 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <!-- TLog -->
         <dependency>
             <groupId>com.yomahub</groupId>
             <artifactId>tlog-web-spring-boot-starter</artifactId>
             <version>${tlog.version}</version>
         </dependency>
+
+        <!-- db -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>${pagehelper.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>${ojdbc.version}</version>
+        </dependency>
+
 
         <!-- tool -->
         <dependency>
