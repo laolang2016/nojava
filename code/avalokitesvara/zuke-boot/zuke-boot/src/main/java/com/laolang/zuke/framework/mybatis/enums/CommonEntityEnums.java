@@ -1,5 +1,6 @@
 package com.laolang.zuke.framework.mybatis.enums;
 
+import cn.hutool.core.util.StrUtil;
 import com.google.common.collect.Maps;
 import java.util.Map;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,14 @@ public class CommonEntityEnums {
             for (DefaultValue e : values()) {
                 value_map.put(e.getValue(), e);
             }
+        }
+
+        public static boolean hasValue(String value) {
+            return value_map.containsKey(value);
+        }
+
+        public static boolean yes(String value) {
+            return hasValue(value) && StrUtil.equals(YES.getValue(), value);
         }
 
         public static DefaultValue getByValue(String value) {
@@ -46,6 +55,10 @@ public class CommonEntityEnums {
 
         public static Status getByValue(String value) {
             return value_map.get(value);
+        }
+
+        public static boolean hasValue(String value) {
+            return value_map.containsKey(value);
         }
     }
 }

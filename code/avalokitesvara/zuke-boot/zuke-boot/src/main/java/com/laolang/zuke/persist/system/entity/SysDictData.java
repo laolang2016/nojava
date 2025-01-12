@@ -9,15 +9,11 @@ import com.laolang.zuke.persist.system.enums.SysDictEnums;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@KeySequence(value = "seq_sys_dict_type", dbType = DbType.ORACLE)
-@TableName("sys_dict_type")
+@KeySequence(value = "seq_sys_dict_data", dbType = DbType.ORACLE)
+@TableName("sys_dict_data")
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class SysDictType extends BaseEntity {
-    /**
-     * 字典名称
-     */
-    private String name;
+public class SysDictData extends BaseEntity {
 
     /**
      * 字典类型
@@ -27,17 +23,33 @@ public class SysDictType extends BaseEntity {
     private String type;
 
     /**
-     * 字典分组
+     * 字典所在分组
      *
      * @see SysDictEnums.GroupCode
      */
     private String groupCode;
 
     /**
-     * 字典分类状态
+     * 字典标签
+     */
+    private String label;
+
+    /**
+     * 字典值
+     */
+    private String value;
+
+    /**
+     * 是否默认值
+     *
+     * @see CommonEntityEnums.DefaultValue
+     */
+    private String defaultValue;
+
+    /**
+     * 字典状态
      *
      * @see CommonEntityEnums.Status
      */
     private String status;
-
 }

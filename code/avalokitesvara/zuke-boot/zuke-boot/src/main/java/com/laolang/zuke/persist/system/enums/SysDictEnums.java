@@ -16,7 +16,7 @@ public class SysDictEnums {
         private final String value;
         private final String desc;
 
-        private static final Map<String, GroupCode> value_map = Maps.newHashMap();
+        public static final Map<String, GroupCode> value_map = Maps.newHashMap();
 
         static {
             for (GroupCode e : values()) {
