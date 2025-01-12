@@ -3,7 +3,7 @@
     <properties>
         <property name="LOG_HOME">../logs/zuke-boot</property>
         <property name="FILE_NAME">app</property>
-        <property name="zuke.level">debug</property>
+        <property name="zuke.level">info</property>
     </properties>
 
 
