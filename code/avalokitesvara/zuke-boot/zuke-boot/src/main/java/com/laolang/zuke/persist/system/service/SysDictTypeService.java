@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface SysDictTypeService extends BaseService<SysDictType> {
     List<SysDictTypeCountDto> countByIds(List<Long> ids);
+
+    List<SysDictType> listTypeByGroupCode(String groupCode);
 }

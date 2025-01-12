@@ -160,9 +160,9 @@ public class SysDictLogic {
 
         // 更新字典数据状态
         if (CommonEnums.YesNoChar.yes(req.getUpdateData())) {
-            sysDictDataService.updateByGroupAndType(type.getGroupCode(), type.getType());
+            sysDictDataService.updateByGroupAndType(type.getGroupCode(), type.getType(), req.getStatus());
         }
-        type.setType(req.getStatus());
+        type.setStatus(req.getStatus());
         sysDictTypeService.updateById(type);
     }
 
@@ -171,9 +171,7 @@ public class SysDictLogic {
      */
     public List<SysDictTypeTypeInfoListRsp> typeTypeList(SysDictTypeTypeInfoListReq req) {
         assertDictGroupCode(req.getGroupCode());
-        LambdaQueryWrapper<SysDictType> wrapper = Wrappers.lambdaQuery();
-        wrapper.eq(SysDictType::getGroupCode, req.getGroupCode());
-        List<SysDictType> types = sysDictTypeService.list(wrapper);
+        List<SysDictType> types = sysDictTypeService.listTypeByGroupCode(req.getGroupCode());
         return types.stream().map(sysDictType -> {
             SysDictTypeTypeInfoListRsp rsp = new SysDictTypeTypeInfoListRsp();
             rsp.setType(sysDictType.getType());
@@ -187,13 +185,15 @@ public class SysDictLogic {
      */
     public PageInfo<SysDictDataListRsp> dataList(SysDictDataListReq req) {
         assertDictGroupCode(req.getGroupCode());
-        assertDityStatus(req.getStatus());
+        if (StrUtil.isNotBlank(req.getStatus())) {
+            assertDityStatus(req.getStatus());
+        }
 
         LambdaQueryWrapper<SysDictData> wrapper = Wrappers.lambdaQuery();
-        wrapper.eq(StrUtil.isNotBlank(req.getType()), SysDictData::getGroupCode, req.getType());
+        wrapper.eq(StrUtil.isNotBlank(req.getType()), SysDictData::getType, req.getType());
         wrapper.eq(StrUtil.isNotBlank(req.getGroupCode()), SysDictData::getGroupCode, req.getGroupCode());
-        wrapper.eq(StrUtil.isNotBlank(req.getStatus()), SysDictData::getGroupCode, req.getStatus());
-        wrapper.like(StrUtil.isNotBlank(req.getLabel()), SysDictData::getGroupCode, req.getLabel());
+        wrapper.eq(StrUtil.isNotBlank(req.getStatus()), SysDictData::getStatus, req.getStatus());
+        wrapper.like(StrUtil.isNotBlank(req.getLabel()), SysDictData::getLabel, req.getLabel());
         return PageUtil.buildPage(sysDictDataService.listPage(req.getPage(), req.getSize(), wrapper), new Function<SysDictData, SysDictDataListRsp>() {
             @Override
             public SysDictDataListRsp apply(SysDictData sysDictData) {
@@ -217,6 +217,7 @@ public class SysDictLogic {
         assertDityStatus(req.getStatus());
         assertDictDefaultValue(req.getDefaultValue());
         assertDictGroupCode(req.getGroupCode());
+        assertDictGroupCode(req.getGroupCode(), req.getType());
 
         assertTypeDataExistForEdit(req);
 
@@ -230,33 +231,25 @@ public class SysDictLogic {
             entity.setStatus(req.getStatus());
             sysDictDataService.updateById(entity);
 
-            // 统一分组统一类型下,只允许有一个默认值
+            // 同一分组统一类型下,只允许有一个默认值
             if (CommonEntityEnums.DefaultValue.yes(req.getDefaultValue())) {
                 UpdateWrapper<SysDictData> update = Wrappers.update();
                 update.lambda().eq(SysDictData::getGroupCode, req.getGroupCode())
                         .eq(SysDictData::getType, req.getType())
                         .ne(SysDictData::getId, req.getId())
-                        .set(SysDictData::getStatus, CommonEntityEnums.DefaultValue.NO.getValue());
+                        .set(SysDictData::getDefaultValue, CommonEntityEnums.DefaultValue.NO.getValue());
                 sysDictDataService.update(update);
             }
         } else {
             SysDictData insert = new SysDictData();
-            sysDictDataService.save(insert);
-        }
-    }
+            insert.setType(req.getType());
+            insert.setGroupCode(req.getGroupCode());
+            insert.setLabel(req.getLabel());
+            insert.setValue(req.getValue());
+            insert.setDefaultValue(req.getDefaultValue());
+            insert.setStatus(req.getStatus());
 
-    /**
-     * 断言字典数据是否存在
-     */
-    private void assertTypeDataExistForEdit(SysDictDataEditReq req) {
-        LambdaQueryWrapper<SysDictData> wrapper = Wrappers.lambdaQuery();
-        wrapper.ne(Objects.nonNull(req.getId()), SysDictData::getId, req.getId());
-        wrapper.eq(SysDictData::getGroupCode, req.getGroupCode());
-        wrapper.eq(SysDictData::getType, req.getType());
-        long count = sysDictDataService.count(wrapper);
-        if (count > 0) {
-            log.error("字典数据已存在. req:{}", JsonUtil.toJsonString(req));
-            throw new BusinessException("字典数据已存在");
+            sysDictDataService.save(insert);
         }
     }
 
@@ -277,6 +270,22 @@ public class SysDictLogic {
     public void dataDelete(SysDictDataDeleteReq req) {
         assertDictDataExistByIds(req.getIds());
         sysDictDataService.removeBatchByIds(req.getIds());
+    }
+
+    /**
+     * 断言字典数据是否存在
+     */
+    void assertTypeDataExistForEdit(SysDictDataEditReq req) {
+        LambdaQueryWrapper<SysDictData> wrapper = Wrappers.lambdaQuery();
+        wrapper.ne(Objects.nonNull(req.getId()), SysDictData::getId, req.getId());
+        wrapper.eq(SysDictData::getGroupCode, req.getGroupCode());
+        wrapper.eq(SysDictData::getType, req.getType());
+        wrapper.eq(SysDictData::getValue, req.getValue());
+        long count = sysDictDataService.count(wrapper);
+        if (count > 0) {
+            log.error("字典数据已存在. req:{}", JsonUtil.toJsonString(req));
+            throw new BusinessException("字典数据已存在");
+        }
     }
 
     /**
@@ -341,6 +350,19 @@ public class SysDictLogic {
     void assertDictGroupCode(String groupCode) {
         if (!SysDictEnums.GroupCode.value_map.containsKey(groupCode)) {
             throw new BusinessException("字典分组不存在");
+        }
+    }
+
+    /**
+     * 断言字典类型是否存在
+     *
+     * @param groupCode 字典分组编码
+     * @param type      字典类型
+     */
+    void assertDictGroupCode(String groupCode, String type) {
+        List<SysDictType> types = sysDictTypeService.listTypeByGroupCode(groupCode);
+        if (CollUtil.isEmpty(types) || !types.stream().map(SysDictType::getType).collect(Collectors.toList()).contains(type)) {
+            throw new BusinessException("字典类型不存在");
         }
     }
 

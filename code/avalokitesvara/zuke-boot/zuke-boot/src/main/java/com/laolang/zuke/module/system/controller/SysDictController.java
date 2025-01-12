@@ -78,6 +78,7 @@ public class SysDictController {
     /**
      * 字典类型列表
      */
+    @PostMapping("type/typeList")
     public List<SysDictTypeTypeInfoListRsp> typeTypeList(@Validated @RequestBody SysDictTypeTypeInfoListReq req) {
         return sysDictLogic.typeTypeList(req);
     }

@@ -1,6 +1,7 @@
 package com.laolang.zuke.persist.system.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.laolang.zuke.framework.mybatis.core.BaseServiceImpl;
 import com.laolang.zuke.persist.system.entity.SysDictData;
@@ -16,10 +17,12 @@ public class SysDictDataServiceImpl extends BaseServiceImpl<SysDictDataMapper, S
     private final SysDictDataMapper sysDictDataMapper;
 
     @Override
-    public void updateByGroupAndType(String groupCode, String type) {
-        LambdaQueryWrapper<SysDictData> wrapper = Wrappers.lambdaQuery();
-        wrapper.eq(SysDictData::getGroupCode, groupCode);
-        wrapper.eq(SysDictData::getType, type);
+    public void updateByGroupAndType(String groupCode, String type, String status) {
+        UpdateWrapper<SysDictData> wrapper = Wrappers.update();
+        wrapper.lambda()
+                .eq(SysDictData::getGroupCode, groupCode)
+                .eq(SysDictData::getType, type)
+                .set(SysDictData::getStatus, status);
         update(wrapper);
     }
 

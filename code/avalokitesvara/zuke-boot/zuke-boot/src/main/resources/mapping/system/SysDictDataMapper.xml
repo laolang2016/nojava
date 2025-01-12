@@ -5,7 +5,31 @@
 <mapper namespace="com.laolang.zuke.persist.system.mapper.SysDictDataMapper">
 
     <delete id="deleteByTypeIds">
-
+        update sys_dict_data set deleted = 1 where id in
+        (
+            select t3.id
+                from (
+                    select
+                        t1.id,t1.group_code|| ','|| t1.type as group_code_type
+                    from
+                        sys_dict_data t1
+                    where
+                        t1.deleted = 0
+                ) t3
+                where
+                    t3.group_code_type in
+                    (
+                        select
+                            t2.group_code|| ','|| t2.type as group_code_type
+                            from
+                                sys_dict_type t2
+                            where
+                            t2.id in
+                            <foreach collection="typeIds" item="typeId" open="(" separator="," close=")">
+                                #{typeId}
+                            </foreach>
+                    )
+        )
     </delete>
 
 </mapper>
