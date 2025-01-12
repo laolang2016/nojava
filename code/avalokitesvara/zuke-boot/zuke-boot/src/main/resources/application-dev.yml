@@ -1,0 +1,21 @@
+server:
+  port: 8092
+  servlet:
+    context-path: /
+
+spring:
+  # 当 HTTP 状态码为 4xx 时直接抛出异常
+  mvc:
+    throw-exception-if-no-handler-found: true
+    # 解决PatternsRequestCondition.getPatterns()“ because “this.condition“ is null问题
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  #  关闭默认的静态资源路径映射
+  web:
+    resources:
+      add-mappings: false
+
+
+logging:
+  config: classpath:log4j2-dev.xml
+
